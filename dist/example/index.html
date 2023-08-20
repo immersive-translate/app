@@ -7,8 +7,14 @@
   </head>
   <body>
     <article>
-      <h1>Sample</h1>
-      <p>Theowenyoungmail</p>
+      <progress id="progressBar" value="50" max="100"></progress>
     </article>
+    <script>
+      setTimeout(() => {
+        const progressBar = document.querySelector("#progressBar");
+        progressBar.value = 80;
+      }, 1000);
+    </script>
+
   </body>
 </html>
