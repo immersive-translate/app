@@ -1,4 +1,4 @@
-(()=>{var Za=Object.defineProperty;var ei=(e,t)=>{for(var n in t)Za(e,n,{get:t[n],enumerable:!0})};var S={BUILD_TIME:"2023-10-06T12:33:26.928Z",VERSION:"0.9.9",PROD:"1",REDIRECT_URL:"https://dash.immersivetranslate.com/auth-done/",PROD_API:"0",BETA:"0",IMMERSIVE_TRANSLATE_INJECTED_CSS:`:root {
+(()=>{var Za=Object.defineProperty;var ei=(e,t)=>{for(var n in t)Za(e,n,{get:t[n],enumerable:!0})};var S={BUILD_TIME:"2023-10-07T09:11:51.663Z",VERSION:"0.9.9",PROD:"1",REDIRECT_URL:"https://dash.immersivetranslate.com/auth-done/",PROD_API:"0",BETA:"0",IMMERSIVE_TRANSLATE_INJECTED_CSS:`:root {
   --immersive-translate-theme-underline-borderColor: #72ece9;
   --immersive-translate-theme-nativeUnderline-borderColor: #72ece9;
   --immersive-translate-theme-nativeDashed-borderColor: #72ece9;
