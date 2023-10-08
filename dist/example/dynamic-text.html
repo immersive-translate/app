@@ -1,0 +1,16 @@
+<html>
+  <head></head>
+  <body>
+    <div id="test">
+      hello
+      <br />
+      <div onclick="clickMore()">更多</div>
+    </div>
+  </body>
+  <script>
+    function clickMore() {
+      const text = document.createTextNode("world");
+      document.getElementById("test").appendChild(text);
+    }
+  </script>
+</html>
