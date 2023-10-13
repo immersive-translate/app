@@ -7,69 +7,32 @@
   </head>
   <body>
     <article>
-      <p>他上了一辆公交车。他在车上和其他人交流</p>
-
       <p>
-        他上了一辆公交车。
+        What are CRDTs made from, though? It looks like typically it's some
+        internal stuff, a function to resolve the internal stuff to a
+        <code>value</code>, and a function to <code>merge</code> two of the data structure
+        together. The <code>merge</code>
+        function is the number-one-most-important thing about this whole
+        arrangement, and has to satisfy1 these three laws:
       </p>
-      <p>他在车上和其他人交流</p>
-
-
-
-
-
-
-
-
-
-
-
+      <br />
+      <div>分割线</div>
       <p>
-        他上了一辆公交车。
+        These properties appeal to me! If CRDTs can automatically and
+        independently converge, no matter how far apart they drift, then you
+        could store them wherever and however you like. 
       </p>
-      <p>他在车上和其他人交流</p>
       <p>
-        他上了一辆公交车。
+        What are CRDTs made from, though? It looks like typically it's some
+        internal stuff, a function to resolve the internal stuff to a
+        <code>value</code>, and a function to <code>merge</code> two of the data structure
+        together. 
       </p>
-      <p>他在车上和其他人交流</p>
       <p>
-        他上了一辆公交车。
+        If all these are true, we can always merge two states, regardless of how
+        many changes have been made since we last merged, and get the same
+        result on both sides of the sync. Cool!
       </p>
-      <p>他在车上和其他人交流</p>
-      <p>
-        他上了一辆公交车。
-      </p>
-      <p>他在车上和其他人交流</p>
-      <p>
-        他上了一辆公交车。
-      </p>
-      <p>他在车上和其他人交流</p>
-      <p>
-        他上了一辆公交车。
-      </p>
-      <p>他在车上和其他人交流</p>
-      <p>
-        他上了一辆公交车。
-      </p>
-      <p>他在车上和其他人交流</p>
-      <p>
-        他上了一辆公交车。
-      </p>
-      <p>他在车上和其他人交流</p>
-      <p>
-        他上了一辆公交车。
-      </p>
-      <p>他在车上和其他人交流</p>
-      <p>
-        他上了一辆公交车。
-      </p>
-      <p>他在车上和其他人交流</p>
-      <p>
-        他上了一辆公交车。
-      </p>
-      <p>他在车上和其他人交流</p>
     </article>
-
-    <script src="./dist/firefox/src/entry_test.js"></script>
   </body>
 </html>
