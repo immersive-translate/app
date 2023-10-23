@@ -18,15 +18,12 @@ const open = (file) => {
       reader.onload = function (evt) {
         document.open();
 
-        // escape html tag
-        const txtContent = escapeHTML(reader.result);
-
-        let txtWithPTag = "<p>";
-        txtWithPTag += txtContent.replace(/\n\n/g, "</p><p>");
-        txtWithPTag += "</p>";
-
-        let html =
-          `<!DOCTYPE html><html><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title></title></head><body><article>${txtWithPTag}</article></body></html>`;
+        let txtContent = reader.result;
+        if (!/(\r\n\r\n)|(\n\n)/.test(txtContent)) {
+          txtContent = txtContent.replace(/(\r\n)|(\n)/g, "\n\n");
+        }
+        const html =
+          `<html><head><meta name="color-scheme" content="light dark"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap; font-size:16px;">${txtContent}</pre></body></html>`;
         document.write(html);
         document.close();
       };
