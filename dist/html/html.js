@@ -16,16 +16,17 @@ const open = (file) => {
       const reader = new FileReader();
       reader.readAsText(file, "UTF-8");
       reader.onload = function (evt) {
-        document.open();
-
-        let txtContent = reader.result;
-        if (!/(\r\n\r\n)|(\n\n)/.test(txtContent)) {
-          txtContent = txtContent.replace(/(\r\n)|(\n)/g, "\n\n");
+        // escape html tag
+        const txtContent = escapeHTML(reader.result);
+        let txtWithPTag = "<p>";
+        // windows \r\n linux and unix \n
+        if (/(\r\n\r\n)|(\n\n)/.test(txtContent)) {
+          txtWithPTag += txtContent.replace(/(\r\n\r\n)|(\n\n)/g, "</p><p>");
+        } else if (/(\r\n)|(\n)/.test(txtContent)) {
+          txtWithPTag += txtContent.replace(/(\r\n)|(\n)/g, "</p><p>");
         }
-        const html =
-          `<html><head><meta name="color-scheme" content="light dark"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap; font-size:16px;">${txtContent}</pre></body></html>`;
-        document.write(html);
-        document.close();
+        txtWithPTag += "</p>";
+        document.body.innerHTML = txtWithPTag;
       };
       reader.onerror = function (evt) {
         alert("error reading file");
