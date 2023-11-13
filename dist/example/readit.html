@@ -1,0 +1,353 @@
+<html>
+    <head>
+        <style>
+            :root {
+                --width: 1200px;
+                --font-main: Georgia, serif;
+                --font-secondary: Georgia, serif;
+                --font-scale: 1.3em;
+                --background-color: #fffff8;
+                --heading-color: #111;
+                --text-color: #222;
+                --link-color: #111;
+                --visited-color: #222;
+                --code-background-color: #f2f2f2;
+                --code-color: #222;
+                --blockquote-color: #222;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --background-color: #1f1b1b;
+                    --heading-color: #e2e1e1;
+                    --text-color: #cdcdcd;
+                    --link-color: #cdcdcd;
+                    --visited-color: #cdcdcd;
+                    --code-background-color: #1f1b1b;
+                    --code-color: #cdcdcd;
+                    --blockquote-color: #cdcdcd;
+                }
+            }
+
+            body {
+                font-family: var(--font-secondary);
+                font-size: var(--font-scale);
+                margin: auto;
+                padding: 20px;
+                max-width: var(--width);
+                text-align: left;
+                /* background-color: var(--background-color); */
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                line-height: 1.5;
+                color: var(--text-color);
+  background: linear-gradient(to right, black 50%, white 50%);
+            }
+            p {
+              margin: 8px 0;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-family: var(--font-main);
+                color: var(--heading-color);
+                font-style: italic;
+            }
+
+            strong,
+            b {
+                color: var(--heading-color);
+            }
+
+            a {
+                color: var(--link-color);
+                cursor: pointer;
+                text-decoration: underline;
+            }
+
+            nav a {
+                margin-right: 5px;
+            }
+
+            button {
+                margin: 0;
+            }
+
+            main {
+                line-height: 1.6;
+            }
+
+            table {
+                width: 100%;
+            }
+
+            hr {
+                border: 0;
+                border-top: 1px dashed;
+            }
+
+            img {
+                max-width: 100%;
+                margin: 16px auto;
+            }
+
+            code {
+                font-family: monospace;
+                padding: 2px;
+                background-color: var(--code-background-color);
+                color: var(--code-color);
+                border-radius: 3px;
+            }
+
+            blockquote {
+                border-left: 1px solid #999;
+                color: var(--code-color);
+                padding-left: 20px;
+                font-style: italic;
+            }
+
+            footer {
+                padding: 25px 0;
+                text-align: center;
+            }
+
+            button {
+                border: 0;
+                background-color: inherit;
+                text-decoration: underline;
+                color: var(--heading-color);
+            }
+
+            .title {
+                text-decoration: none;
+            }
+
+            .title h1 {
+                font-size: 1.5em;
+            }
+
+            .inline {
+                width: auto !important;
+            }
+
+            .highlight,
+            .code {
+                padding: 1px 15px;
+                background-color: var(--code-background-color);
+                color: var(--code-color);
+                border-radius: 3px;
+                margin-block-start: 1em;
+                margin-block-end: 1em;
+                overflow-x: auto;
+            }
+
+            /* blog post list */
+            ul.blog-posts {
+                list-style-type: none;
+                padding: unset;
+            }
+
+            ul.blog-posts li {
+                display: flex;
+            }
+
+            ul.blog-posts li span {
+                flex: 0 0 130px;
+            }
+
+            ul.blog-posts li a:visited {
+                color: var(--visited-color);
+            }
+        </style>
+        <style>
+            .tl_article h1,
+            .tl_article h2 {
+                font-weight: 700;
+                font-style: normal;
+                font-size: 32px;
+                margin: 21px 0px 12px;
+                line-height: 34px;
+            }
+
+            .tl_article address {
+                font-size: 15px;
+                line-height: 18px;
+                margin: 12px 0px;
+                font-style: normal;
+            }
+
+            .tl_article address time:before {
+                content: "\2022";
+                padding: 0 7px;
+            }
+
+            .tl_article p {
+                font-size: 18px;
+            }
+
+            .tl_article hr {
+                margin: 40px 0 0 0;
+            }
+        </style>
+    <style>
+
+    .block {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .source {
+      flex:1;
+      padding-right:30px;
+      min-width: 360px;
+      color: white;
+    }
+    .target {
+      flex:1;
+      padding-left:30px;
+      font-size: 20px !important;
+            min-width: 360px;
+
+    }
+    .source {
+        position: relative;
+
+    }
+
+.source::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 33%; /* 控制虚线长度为父容器的50% */
+  background: linear-gradient(#dddddd, #dddddd 50%, transparent 50%); /* 渐变背景创建虚线效果 */
+  background-size: 1px 5px; /* 虚线宽度和间隔 */
+  position: absolute;
+  top: 25%; /* 设置顶部位置使得虚线垂直居中 */
+  right: 0;
+}
+
+    @media (max-width: 836px) {
+      .block {
+        flex-direction: column;
+      }
+      .source {
+        padding-right: 0;
+      }
+.source::after {
+        background: none;
+  }
+      .target {
+        padding-left: 0;
+        text-decoration: underline dotted #333;
+
+      }
+    }
+
+
+
+    </style>
+        <meta charset="utf-8" />
+        <title>化石讲述了人类之前居住在北美的最后一种灵长类动物的故事</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="MobileOptimized" content="176" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="化石讲述了人类之前居住在北美的最后一种灵长类动物的故事" />
+        <meta
+            property="og:description"
+            content="Fossils tell tale of last primate to inhabit North America before humans
+
+化石讲述了人类之前居住在北美的最后一种灵长类动物的故事
+
+ Illustration of Ekgmowechashala, the last primate to inhabit North America before humans. Credit: Kristen Tietjen, scientific illustrator with the KU Biodiversity Institute and Natural History Mus"
+        />
+        <meta property="og:image" content="https://scx1.b-cdn.net/csz/news/800a/2023/fossils-tell-tale-of-l.jpg" />
+        <meta property="og:site_name" content="readit" />
+        <meta property="article:published_time" content="2023-11-08T01:08:19.000Z" />
+        <meta property="article:modified_time" />
+        <meta property="article:author" content="Science X" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="化石讲述了人类之前居住在北美的最后一种灵长类动物的故事" />
+        <meta
+            name="twitter:description"
+            content="Fossils tell tale of last primate to inhabit North America before humans
+
+化石讲述了人类之前居住在北美的最后一种灵长类动物的故事
+
+ Illustration of Ekgmowechashala, the last primate to inhabit North America before humans. Credit: Kristen Tietjen, scientific illustrator with the KU Biodiversity Institute and Natural History Mus"
+        />
+        <meta name="twitter:image" content="" />
+        <link rel="canonical" href="https://readit.com/p/lHTtuKRr" />
+    </head>
+    <body class="tl_article">
+        <header class="tl_article_header" dir="auto">
+            <h1>化石讲述了人类之前居住在北美的最后一种灵长类动物的故事</h1>
+            <address><span rel="author">Science X</span><time>2023-11-08</time></address>
+        </header>
+        <article id="root" class="tl_article_content">
+      <div class="block">
+      <p class="source">
+                Now, paleontologists from the University of Kansas and the Institute of Vertebrate Paleontology and Paleoanthropology in Beijing have published evidence in the Journal of Human Evolution shedding light on the long-standing
+                saga of Ekgmowechashala, based on <a href="https://phys.org/tags/fossil+teeth/" rel="tag">fossil teeth</a> and jaws found in both Nebraska and China.
+            </p>
+            <p class="target mt-0 mb-3 im-paragraph">现在，来自堪萨斯大学和北京古脊椎动物与古人类学研究所的古生物学家在《人类进化杂志》上发表了证据，基于内布拉斯加州和中国发现的牙齿和颌骨化石，揭示了埃克莫韦查沙拉长期存在的传奇故事。 。</p>
+
+      </div>
+
+      <div class="block">
+
+      <img
+                title="Illustration of Ekgmowechashala, the last primate to inhabit North America before humans. Credit: Kristen Tietjen, scientific illustrator with the KU Biodiversity Institute and Natural History Museum."
+                alt="Fossils tell tale of last primate to inhabit North America before humans"
+                src="https://scx1.b-cdn.net/csz/news/800a/2023/fossils-tell-tale-of-l.jpg"
+            />
+      </div>
+
+
+      <div class="block">
+
+            <p class="mt-0 mb-3 source im-paragraph">
+                The story of Ekgmowechashala, the final primate to inhabit North America before Homo sapiens or Clovis people, reads like a spaghetti Western: A grizzled and mysterious loner, against the odds, ekes out an existence on the
+                American Plains.
+            </p>
+            <p class="mt-0 mb-3 target im-paragraph">艾克莫韦查萨拉是智人或克洛维斯人之前居住在北美的最后一种灵长类动物，它的故事读起来就像意大利西部片：一个头发花白、神秘的孤独者，克服困难，在美国平原上勉强生存。</p>
+      </div>
+      <div class="block">
+            <p class="mt-0 mb-3 source im-paragraph">
+                Except this tale unfolded about 30 million years ago, just after the Eocene-Oligocene transition during which North America saw great cooling and drying, making the continent less hospitable to warmth-loving primates.
+            </p>
+            <p class="mt-0 mb-3 target im-paragraph">不过这个故事发生在大约三千万年前，就在始新世-渐新世过渡之后，北美出现了严重的变冷和干燥，使得这片大陆不太适合喜温暖的灵长类动物。</p>
+      </div>
+      <div class="block">
+            <p class="mt-0 mb-3 source im-paragraph">
+                Now, paleontologists from the University of Kansas and the Institute of Vertebrate Paleontology and Paleoanthropology in Beijing have published evidence in the Journal of Human Evolution shedding light on the long-standing
+                saga of Ekgmowechashala, based on <a href="https://phys.org/tags/fossil+teeth/" rel="tag">fossil teeth</a> and jaws found in both Nebraska and China.
+            </p>
+            <p class="mt-0 mb-3 target im-paragraph">现在，来自堪萨斯大学和北京古脊椎动物与古人类学研究所的古生物学家在《人类进化杂志》上发表了证据，基于内布拉斯加州和中国发现的牙齿和颌骨化石，揭示了埃克莫韦查沙拉长期存在的传奇故事。 。</p>
+      </div>
+      <div class="block">
+            <p class="source mt-0 mb-3 im-paragraph">
+                To do so, the researchers first had to reconstruct its <a href="https://phys.org/tags/family+tree/" rel="tag">family tree</a>, a job helped by the discovery of an even more ancient Chinese "sister taxon" of Ekgmowechashala
+                the team has named Palaeohodites (or "ancient wanderer").
+            </p>
+            <p class="mt-0 mb-3 target im-paragraph">为此，研究人员首先必须重建其家谱，这项工作得益于发现了更古老的中国 Ekgmowechashala“姐妹类群”，该团队将其命名为 Palaeohodites（或“古代流浪者”）。</p>
+      </div>
+      <div class="block">
+            <p class="mt-0 mb-3 source im-paragraph">The Chinese fossil discovery resolves the mystery of Ekgmowechashala's presence in North America, showing it was an immigrant rather than the product of local evolution.</p>
+            <p class="mt-0 mb-3 target im-paragraph">中国化石的发现解开了埃克莫韦查沙拉在北美的存在之谜，表明它是一种移民，而不是当地进化的产物。</p>
+      </div>
+        </article>
+        <hr />
+        <p dir="auto">用户于2023-11-08保存本页面，原文版权归<a href="https://phys.org/news/2023-11-fossils-tale-primate-inhabit-north.html">源站点</a>所有。 -- <a href="https://immersivetranslate.com/" target="_blank">沉浸式翻译</a></p>
+        <p dir="auto"><a href="https://immersivetranslate.com/" target="_blank">我也要保存双语页面？</a></p>
+        <script></script>
+    </body>
+    <div id="immersive-translate-popup" style="all: initial;"></div>
+</html>
+

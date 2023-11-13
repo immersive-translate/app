@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Split Background</title>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+  }
+  .split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  .left {
+    left: 0;
+    background-color: #111;
+  }
+
+  .right {
+    right: 0;
+    background-color: #fff;
+  }
+
+  /* If you want the content to be centered vertically and horizontally */
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  /* Style for the content */
+  .content {
+    color: #fff;
+    font-size: 20px;
+  }
+
+  .right .content {
+    color: #555;
+  }
+</style>
+</head>
+<body>
+
+<div class="split left">
+  <div class="centered">
+    <div class="content">
+      <h2>Left Side</h2>
+
+            <p class="mt-0 mb-3 source im-paragraph">
+                The story of Ekgmowechashala, the final primate to inhabit North America before Homo sapiens or Clovis people, reads like a spaghetti Western: A grizzled and mysterious loner, against the odds, ekes out an existence on the
+                American Plains.
+            </p>
+
+
+
+            <p class="mt-0 mb-3 source im-paragraph">
+                Except this tale unfolded about 30 million years ago, just after the Eocene-Oligocene transition during which North America saw great cooling and drying, making the continent less hospitable to warmth-loving primates.
+            </p>
+    </div>
+  </div>
+</div>
+
+<div class="split right">
+  <div class="centered">
+    <div class="content">
+      <h2>Right Side</h2>
+
+            <p class="mt-0 mb-3 target im-paragraph">艾克莫韦查萨拉是智人或克洛维斯人之前居住在北美的最后一种灵长类动物，它的故事读起来就像意大利西部片：一个头发花白、神秘的孤独者，克服困难，在美国平原上勉强生存。</p>
+
+            <p class="mt-0 mb-3 target im-paragraph">不过这个故事发生在大约三千万年前，就在始新世-渐新世过渡之后，北美出现了严重的变冷和干燥，使得这片大陆不太适合喜温暖的灵长类动物。</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
