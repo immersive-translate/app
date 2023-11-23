@@ -44,11 +44,11 @@ See https://github.com/adobe-type-tools/cmap-resources
       type="application/l10n"
       href="../pdf/locale/locale.properties"
     />
-    <script src="../build/pdf.js?v=1700575058"></script>
+    <script src="../build/pdf.js?v=1700753623"></script>
 
-    <link rel="stylesheet" href="../pdf/viewer.css?v=1700575058" />
-    <script src="../pdf/viewer.js?v=1700575058"></script>
-    <link rel="stylesheet" href="../pdf/custom-pdf.css?v=1700575058" />
+    <link rel="stylesheet" href="../pdf/viewer.css?v=1700753623" />
+    <script src="../pdf/viewer.js?v=1700753623"></script>
+    <link rel="stylesheet" href="../pdf/custom-pdf.css?v=1700753623" />
     <link rel="stylesheet" href="../pdf/jquery/jquery-ui-1.13.2.css" />
     <script>//监听未捕获异常
 window.addEventListener("unhandledrejection", noHandleError);
@@ -90,8 +90,14 @@ init();
 let hasInited = false;
 function init() {
   setTimeout(() => {
+    const containers = document.getElementById("editorModeButtons");
+    const downloadManager = globalThis?.PDFViewerApplication?.downloadManager;
+    if (!downloadManager || !containers) {
+      init();
+      return;
+    }
+
     if (!document.getElementById("immersive-helper")) {
-      const containers = document.getElementById("editorModeButtons");
       const helperBtn = document.createElement("a");
       helperBtn.className = "immersive-translate-btn control-button";
       helperBtn.innerText = "帮助";
@@ -101,11 +107,6 @@ function init() {
       containers.appendChild(helperBtn);
     }
 
-    const downloadManager = globalThis?.PDFViewerApplication?.downloadManager;
-    if (!downloadManager) {
-      init();
-      return;
-    }
     if (hasInited) return;
     hasInited = true;
 
@@ -367,7 +368,7 @@ function isChrome() {
   return chromeAgent;
 }
 </script>
-    <script src="../pdf/immservie.js?v=1700575058"></script>
+    <script src="../pdf/immservie.js?v=1700753623"></script>
     <script src="../pdf/download/html2canvas.min.js"></script>
     <script src="../pdf/download/pdf-lib-1.17.1.min.js"></script>
   <link rel="stylesheet" href="../styles/inject.css" /></head>
@@ -376,7 +377,7 @@ function isChrome() {
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WVZZDLS"
       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <link rel="stylesheet" href="../pdf/entry.css?v=1700575058" />
+    <link rel="stylesheet" href="../pdf/entry.css?v=1700753623" />
     <div id="outerContainer">
       <div id="sidebarContainer">
         <div id="toolbarSidebar">
