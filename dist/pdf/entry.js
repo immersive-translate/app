@@ -1,5 +1,22 @@
 //监听未捕获异常
-window.addEventListener("unhandledrejection", noHandleError);
+globalThis.addEventListener("unhandledrejection", noHandleError);
+if (globalThis.parent) {
+  globalThis.parent.postMessage({ type: "pdf-ready" }, "*");
+}
+let pdfBuffer;
+globalThis.addEventListener("message", function (event) {
+  if (event.data && event.data.type != "pdf-local-file") return;
+  event.data.blob.arrayBuffer().then(function (buf) {
+    const application = globalThis.PDFViewerApplication;
+    if ((application && application.open)) {
+      return application.open(buf).then(function () {
+        globalThis.parent.postMessage({ type: "pdf-loaded" }, "*");
+      });
+    } else {
+      pdfBuffer = buf;
+    }
+  });
+});
 
 function noHandleError(event) {
   const message = typeof event.reason == "object"
@@ -30,8 +47,8 @@ function noHandleError(event) {
 
 const DownloadTypeEnum = {
   dual: "dual",
-  translated: "translated"
-}
+  translated: "translated",
+};
 let downloadType = DownloadTypeEnum.dual;
 let startDownload, cancelDialog;
 init();
@@ -56,6 +73,13 @@ function init() {
     }
 
     if (hasInited) return;
+    //检查pdfBuf
+    if (pdfBuffer) {
+      globalThis.PDFViewerApplication.open(pdfBuffer).then(function () {
+        globalThis.parent.postMessage({ type: "pdf-loaded" }, "*");
+      })
+    }
+
     hasInited = true;
 
     const oldDownload = downloadManager.download.bind(downloadManager);
@@ -68,7 +92,7 @@ function init() {
           const pdfBytes = await blob.arrayBuffer();
           const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes, {
             updateMetadata: false,
-            ignoreEncryption: true
+            ignoreEncryption: true,
           });
 
           let newPdfDoc;
@@ -197,7 +221,7 @@ function showDownloadModal() {
     setTimeout(() => {
       document.getElementById("image-radio").addEventListener("change", (e) => {
         pdfImageScale = Number(e.target.value);
-      })
+      });
     }, 100);
 
     const closeElements = dialog.querySelectorAll("[data-action='close']");
@@ -219,7 +243,9 @@ function showDownloadModal() {
       //   document.getElementById("print")?.click();
       // }
     };
-    const translateDownloadBtn = document.getElementById("immersive-translated-download");
+    const translateDownloadBtn = document.getElementById(
+      "immersive-translated-download",
+    );
     if (isNewFeature) translateDownloadBtn.innerText = "译文下载(打印)";
     translateDownloadBtn.onclick = () => {
       if (translateDownloadBtn.classList.contains("immersive-disable")) return;
@@ -238,8 +264,12 @@ function showDownloadModal() {
   const currentStateDOM = document.getElementById("immersive-state");
   currentStateDOM.innerHTML =
     `已翻译 <b>${elements.length}</b> 页 / 总共 ${pagesCount} 页`;
-  document.getElementById("immersive-dual-download")?.classList.remove("immersive-disable");
-  document.getElementById("immersive-translated-download")?.classList.remove("immersive-disable");
+  document.getElementById("immersive-dual-download")?.classList.remove(
+    "immersive-disable",
+  );
+  document.getElementById("immersive-translated-download")?.classList.remove(
+    "immersive-disable",
+  );
 }
 
 function closeModal() {
@@ -280,8 +310,9 @@ async function drawElemetnToPage(pdfDoc, element, page) {
           "printContainer",
           "immersive-modal",
         ].includes(ele.id)
-      )
+      ) {
         return true;
+      }
       if (ele.classList.contains("page") && element.id !== ele.id) {
         return true;
       }

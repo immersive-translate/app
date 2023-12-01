@@ -680,6 +680,9 @@ const PDFViewerApplication = {
   },
   async open(args) {
     let deprecatedArgs = false;
+    //immersive add
+    if(args.url == "emptyfile") return;
+
     if (typeof args === "string") {
       args = {
         url: args
