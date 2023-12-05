@@ -2,6 +2,9 @@
 globalThis.addEventListener("unhandledrejection", noHandleError);
 if (globalThis.parent) {
   globalThis.parent.postMessage({ type: "pdf-ready" }, "*");
+  setTimeout(() => {
+    globalThis.parent.postMessage({ type: "pdf-loaded" }, "*");
+  }, 3000);
 }
 let pdfBuffer;
 globalThis.addEventListener("message", function (event) {
