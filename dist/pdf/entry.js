@@ -6,16 +6,18 @@ if (globalThis.parent) {
 let pdfBuffer;
 globalThis.addEventListener("message", function (event) {
   if (event.data && event.data.type != "pdf-local-file") return;
-  event.data.blob.arrayBuffer().then(function (buf) {
-    const application = globalThis.PDFViewerApplication;
-    if ((application && application.open)) {
-      return application.open(buf).then(function () {
-        globalThis.parent.postMessage({ type: "pdf-loaded" }, "*");
-      });
-    } else {
-      pdfBuffer = buf;
-    }
-  });
+  setTimeout(() => {
+    event.data.blob.arrayBuffer().then(function (buf) {
+      const application = globalThis.PDFViewerApplication;
+      if ((application && application.open)) {
+        return application.open(buf).then(function () {
+          globalThis.parent.postMessage({ type: "pdf-loaded" }, "*");
+        });
+      } else {
+        pdfBuffer = buf;
+      }
+    });
+  }, 500);
 });
 
 function noHandleError(event) {
