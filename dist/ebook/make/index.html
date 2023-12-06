@@ -10,7 +10,7 @@
       content="default-src 'self' blob:; script-src * data: blob: 'unsafe-inline' 'unsafe-eval'; style-src 'self' blob: 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self' blob: data:; frame-src blob: data:; object-src blob: data:; form-action 'none';"
     />
     <title>E-Book Maker</title>
-    <link rel="stylesheet" href="../../styles/inject.css?v=1701786794" />
+    <link rel="stylesheet" href="../../styles/inject.css?v=1701880738" />
     <style>
       :root {
         --active-bg: rgba(0, 0, 0, 0.05);
@@ -329,6 +329,30 @@
         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 16px rgba(0, 0, 0, 0.1),
           0 0 32px rgba(0, 0, 0, 0.1);
       }
+      .start-translation {
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        font-size: 15px;
+        background: var(--bg);
+      }
+      .start-translation-btn {
+            padding-top: 8px;
+    padding-bottom: 8px;
+        font-size: 14px;
+    vertical-align: middle;
+    border-radius: 8px;
+        --primary: #ea4c89;
+        --primary-inverse:#fff;
+        --background-color: var(--primary);
+    --border-color: var(--primary);
+    --color: var(--primary-inverse);
+    outline: none;
+    background-color: var(--background-color);
+    color: var(--color);
+    text-align: center;
+    cursor: pointer;
+      }
       .bold {
         font-weight: bold;
       }
@@ -359,6 +383,26 @@
       a.muted:active {
         color: var(--muted);
       }
+        .immersive-translate-epub-btn {
+  width: fit-content;
+  color: #fff;
+  background-color: #ea4c89;
+  border: none;
+  font-size: 14px;
+  margin: 0px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.immersive-translate-epub-btn:hover {
+  background-color: #f082ac;
+}
+
 
       #tool {
         width: 80%;
@@ -491,6 +535,7 @@
           <div id="tool-inner">
             <a href="#" id="open" class="mr-3 mb-3">New (打开一本新书)</a>
             <a href="#" id="edit" class="mr-3 mb-3">Edit (编辑)</a>
+            <a href="#" id="translate-translation" style="display:none" class="mr-3 mb-3">Translation Only (仅译文翻译)</a>
             <a href="#" id="export" class="mr-3 mb-3 bold"
               ><span id="exportAction">Export (导出) </span
               ><span id="exportStatus"></span
@@ -498,6 +543,9 @@
           </div>
         </div>
       </div>
+      <div class="start-translation">
+           <div href="#" id="translate-dual" class="immersive-translate-epub-btn" style="display: none">开始翻译 (Translate)</div>
+     </div>
 
       <details id="tips">
         <summary>
@@ -510,8 +558,8 @@
       <div id="chapters"></div>
     </div>
 
-    <script src="../../libs/foliate-js/make.js?v=1701786794" type="module"></script>
-    <script src="../ebook-builder-global.js?v=1701786794"></script>
+    <script src="../../libs/foliate-js/make.js?v=1701880738" type="module"></script>
+    <script src="../ebook-builder-global.js?v=1701880738"></script>
     <script src="../../content_script.js" type="module"></script>
   </body>
 </html>
