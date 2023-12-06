@@ -10,7 +10,7 @@
       content="default-src 'self' blob:; script-src * data: blob: 'unsafe-inline' 'unsafe-eval'; style-src 'self' blob: 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self' blob: data:; frame-src blob: data:; object-src blob: data:; form-action 'none';"
     />
     <title>E-Book Maker</title>
-    <link rel="stylesheet" href="../../styles/inject.css?v=1701895163" />
+    <link rel="stylesheet" href="../../styles/inject.css?v=1701895563" />
     <style>
       :root {
         --active-bg: rgba(0, 0, 0, 0.05);
@@ -552,7 +552,7 @@
           </div>
         </div>
       </div>
-      <div class="start-translation" x-data="translationstatus" @immersive-translate-progress-change.window="changeProgress">
+      <div class="start-translation" x-data="translationstatus" @immersive-translate-progress-change.window="changeProgress" @immersive-translate-start-translate.window="starttranslatebypopup">
         <select id="translationMode">
           <option value="dual">翻译为双语(Dual)</option>
           <option value="translation">翻译为仅译文(Translation Only)</option>
@@ -572,8 +572,8 @@
       <div id="chapters"></div>
     </div>
 
-    <script src="../../libs/foliate-js/make.js?v=1701895163" type="module"></script>
-    <script src="../ebook-builder-global.js?v=1701895163"></script>
+    <script src="../../libs/foliate-js/make.js?v=1701895563" type="module"></script>
+    <script src="../ebook-builder-global.js?v=1701895563"></script>
     <script src="../../content_script.js" type="module"></script>
   </body>
 </html>
