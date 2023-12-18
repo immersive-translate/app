@@ -159,7 +159,11 @@ async function handlePdf(pdfDoc) {
     }
     return pdfDoc;
   } catch (error) {
-    alert(error.message);
+    let errMsg = error.message;
+    if (errMsg.startsWith("Expected instance of e, but got instance of undefined")) {
+      errMsg = "该 PDF 文件导出解析出现异常，建议切换 译文(打印)";
+    }
+    alert(errMsg);
     console.error(error);
   }
 }
