@@ -1,4 +1,4 @@
-(()=>{var k={BUILD_TIME:"2024-01-05T20:34:13.000Z",VERSION:"1.1.1",PROD:"1",REDIRECT_URL:"https://dash.immersivetranslate.com/auth-done/",PROD_API:"1",BETA:"0",IMMERSIVE_TRANSLATE_INJECTED_CSS:`:root {
+(()=>{var k={BUILD_TIME:"2024-01-06T15:19:22.000Z",VERSION:"1.1.2",PROD:"1",REDIRECT_URL:"https://dash.immersivetranslate.com/auth-done/",PROD_API:"1",BETA:"0",IMMERSIVE_TRANSLATE_INJECTED_CSS:`:root {
   --immersive-translate-theme-underline-borderColor: #72ece9;
   --immersive-translate-theme-nativeUnderline-borderColor: #72ece9;
   --immersive-translate-theme-nativeDashed-borderColor: #72ece9;
@@ -334,7 +334,16 @@
   display: inline-flex;
   padding: 6px;
   margin: 0 12px;
+  white-space: nowrap;
+  font-size: 0.9em;
 }
+[lang="zh-CN"] .immersive-translate-error-wrapper {
+  font-size: 0.75em;
+}
+[lang="zh-TW"] .immersive-translate-error-wrapper {
+  font-size: 0.75em;
+}
+
 
 .immersive-translate-tooltip {
   position: relative;
