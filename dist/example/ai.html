@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"><p>这里是内容</p></div>
+    <button onclick="render(0)">点击AI流</button>
+    <script>
+      const allText = `
+      Whether you work on your own or with thousands of other developers, using React feels the same. It is designed to let you seamlessly combine components written by independent people, teams, and organizations.
+`;
+      const lists = allText.replaceAll("\n", "").trim().split(" ");
+      function render(index) {
+        setTimeout(() => {
+          document.querySelector("#root p").innerHTML += lists[index] + " ";
+          if (lists[index + 1]) {
+            render(index + 1);
+          }
+        }, 50);
+      }
+    </script>
+  </body>
+</html>

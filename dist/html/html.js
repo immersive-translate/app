@@ -82,3 +82,26 @@ function escapeHTML(htmlStr) {
     .replace(/'/g, "&#39;")
     .replace(/\//g, "&#x2F;");
 }
+
+/**
+ * 处理文件翻译统一入口事件
+ */
+globalThis.addEventListener("message", function (event) {
+  if (event.data && event.data.type != "immersive-translate-local-file") return;
+  setTimeout(() => {
+    // 转换Blob为File
+    const file = new File([event.data.blob], event.data.fileName, {
+      type: event.data.blob.type,
+    });
+
+    open(file).catch((e) => console.error(e));
+    globalThis.parent.postMessage({ type: "html-loaded" }, "*");
+  }, 500);
+});
+
+if (globalThis.parent) {
+  globalThis.parent.postMessage({ type: "html-ready" }, "*");
+  setTimeout(() => {
+    globalThis.parent.postMessage({ type: "html-loaded" }, "*");
+  }, 3000);
+}
