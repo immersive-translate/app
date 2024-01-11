@@ -104,10 +104,10 @@ function init() {
           let title = "";
           if (downloadType == DownloadTypeEnum.translated) {
             newPdfDoc = await handleOnlyTranslatedPdf(pdfDoc);
-            title = filename.replace(".pdf", "-ony-tranlsated.pdf");
+            title = filename.replace(".pdf", "-ony-translated.pdf");
           } else {
             newPdfDoc = await handlePdf(pdfDoc);
-            title = filename.replace(".pdf", "-dual-tranlsated.pdf");
+            title = filename.replace(".pdf", "-dual-translated.pdf");
           }
           if (cancelDialog) return;
           const newPdfBytes = await newPdfDoc.save();
@@ -150,11 +150,13 @@ async function handlePdf(pdfDoc) {
       const [newPage] = await pdfDoc.copyPages(newPdfDoc, [
         sizeMap[`${width}-${height}`],
       ]);
-      await drawElemetnToPage(pdfDoc, element, newPage);
+      await drawElementToPage(pdfDoc, element, newPage);
       pdfDoc.insertPage(pageNum + i + 1, newPage);
       updateProgress(i + 1);
       if (i == elements.length - 1) {
-        closeModal();
+        setTimeout(() => {
+          closeModal();
+        }, 600);
       }
     }
     return pdfDoc;
@@ -183,7 +185,7 @@ async function handleOnlyTranslatedPdf(pdfDoc) {
       const { width, height } = pages[pageNum].getSize();
       newPdfDoc.addPage([width, height]);
       const newPage = newPdfDoc.getPages()[i];
-      await drawElemetnToPage(newPdfDoc, element, newPage);
+      await drawElementToPage(newPdfDoc, element, newPage);
       updateProgress(i + 1);
       if (i == elements.length - 1) {
         closeModal();
@@ -205,7 +207,7 @@ function showDownloadModal() {
   if (!dialog) {
     dialog = document.createElement("div");
     dialog.id = "immersive-modal";
-    dialog.className = "immersive-translate-modal";
+    dialog.className = "immersive-translate-modal notranslate";
     dialog.innerHTML = `
   <div class="immersive-translate-modal-content">
     <span data-action="close" class="immersive-translate-close">&times;</span>
@@ -214,8 +216,11 @@ function showDownloadModal() {
     <div class="input-wrapper" style="">双语下载译文图片清晰度: <input id="image-radio" class='tiny-input' type="number" style="margin-left: 6px;" value="2"/>倍 <p style="font-size:12px;margin: 0 0 0 2px;">(越高越占内存/越慢)<p></div>
     <p class="mobile-hint">建议 PC 端使用，可以调整翻译效果</p>
     <p id="immersive-state"></p>
-    <div class="immersive-translate-progress-container">
-      <div class="immersive-translate-progress-bar" id="immersive-progress"></div>
+    <div style="display:flex;flex-direction:row;align-items:center;">
+      <div class="immersive-translate-progress-container">
+        <div class="immersive-translate-progress-bar" id="immersive-progress"></div>
+      </div>
+      <p id="download-state" style="margin-left: 6px; min-width:50px"></p>
     </div>
     <p>谨慎下载超过300页以上 PDF，容易内存溢出。</p>
     <p>如遇问题查看<a class="immersive-translate-link" href="https://immersivetranslate.com/docs/pdf-helper/#%E4%B8%8B%E8%BD%BD%E6%89%93%E5%8D%B0" target="_blank">帮助</a></p>
@@ -296,7 +301,10 @@ function updateProgress(value) {
   container.style.display = "block";
   const elements = document.querySelectorAll(".immersive-translate-page");
   const progressBar = document.getElementById("immersive-progress");
-  progressBar.style.width = Math.ceil(value * 100 / elements.length) + "%";
+  progressBar.style.width = Math.floor(value * 100 / elements.length) + "%";
+
+  const downloadStateEle = document.getElementById("download-state");
+  if (downloadStateEle) downloadStateEle.innerHTML = value + " 页";
 }
 
 function hiddenProgress() {
@@ -306,9 +314,12 @@ function hiddenProgress() {
   if (!container) return;
   updateProgress(0);
   container.style.display = "none";
+
+  const downloadStateEle = document.getElementById("download-state");
+  if (downloadStateEle) downloadStateEle.innerHTML = "";
 }
 
-async function drawElemetnToPage(pdfDoc, element, page) {
+async function drawElementToPage(pdfDoc, element, page) {
   const canvas = await html2canvas(element, {
     scale: (window.devicePixelRatio || 1) * pdfImageScale,
     ignoreElements: (ele) => {
